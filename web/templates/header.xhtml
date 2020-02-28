@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Title</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <div class="logo">
+                <h:graphicImage library="img" name="woolly.png"/>
+            </div>
+            <div class="descr">
+                <h3>#{ msg.welcome_title }</h3>
+            </div>
+            <div class="welcome">
+                <h4 class="user_name">#{msg.hello} #{user.name}</h4>
+                <h5>
+                    <h:form>
+                        <h:commandLink action="#{loginControl.logout()}" value="#{msg.exit}"/>
+                    </h:form>
+                </h5>
+            </div>
+            <div class="search_div">
+                <h:form styleClass="search_form">
+                    <h:inputText value="#{srchControl.srchString}" styleClass="search_string"/>
+                    <h:commandButton value="#{msg.search_btn}" 
+                                    action="#{srchControl.bySearch}" styleClass="search_button"/>
+                    <h:selectOneMenu styleClass="search_option" value="#{srchControl.srchType}">
+                        <f:selectItems value="#{srchControl.srchMap}"/>
+                    </h:selectOneMenu>
+                    <div class="letters">
+                        <ui:repeat value="#{srchControl.rusLetters}" var="letter">
+                            <h:commandLink action="#{srchControl.byLetter}" value="#{letter}"
+                                           styleClass="#{srchControl.selectedGhar == letter ? 'red' : ''}">
+                                <f:param name="letter" value="#{letter}" />
+                            </h:commandLink>
+                        </ui:repeat>
+                    </div>
+                </h:form>
+            </div>
+        </ui:composition>
+    </h:body>
+</html>
+

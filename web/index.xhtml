@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{msg.idx_title}</title>
+        <h:outputStylesheet library="css" name="style.css" />
+        <!--<f:loadBundle basename="lexis.nls.msg" var="x"/>-->
+    </h:head>
+    <h:body>
+        <div class="basic_div">
+            <div class="head">
+                <div class="logo">
+                    <h:graphicImage library="images" name="woolly.png" width="81" height="100"/>
+                </div>
+                <div class="welcome">
+                    <h4 class="user_name">#{msg.hello} #{user.name}</h4>
+                    <h5>
+                        <h:form>
+                            <h:commandLink action="#{loginControl.logout()}" value="#{msg.exit}"/>
+                        </h:form>
+                    </h5>
+                </div>
+            </div>
+            <div>
+                <h:form class="login_form">
+                    <h3>
+                        #{msg.greeting}
+                    </h3>
+                    <p>
+                        <h:inputText id="user" size="15" value="#{user.name}"
+                            required="true" requiredMessage="#{msg.login_requre}">
+                            <!--or any following examples-->
+                            <!--validator="# {some.bean}"-->
+                            <!--<f:validateLength minimum="5"/>-->
+                            <f:validator validatorId="lex.valid.LogValid"/>
+                        </h:inputText>
+                    </p>
+                    <p>
+                        <h:commandButton class="btn"
+                                         action="#{loginControl.login()}"
+                                type="submit"
+                                    value="#{msg.enter_btn}" />
+                    </p>
+                    <p>
+                        <h:message for="user" styleClass="err_msg"/>
+                    </p>
+                </h:form>
+            </div>
+        </div>
+    </h:body>
+</html>
+

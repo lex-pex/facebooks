@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
+    <h:body>
+
+        <ui:composition>
+
+            <p><strong>#{msg.book_fount}: #{srchControl.currentBooks.size()}</strong></p>
+
+            <h:form rendered="#{srchControl.currentBooks.size() > srchControl.booksDisplayed}">
+                <p><strong>#{msg.pager}: </strong>
+                    <ui:repeat value="#{srchControl.pageNumbers}" var="num">
+                        <h:commandLink value=" #{num} " action="#{srchControl.display()}"
+                                       styleClass="#{num == srchControl.selectedPage ? 'red' : 'bold'}">
+                            <f:param name="page_num" value="#{num}"/>
+                        </h:commandLink>
+                    </ui:repeat>
+                </p>
+            </h:form>
+
+            <h:dataTable value="#{srchControl.showBooks}"
+                         var="b" cellspacing="10px" columnClasses="col1, col2, col3">
+                <h:column>
+                    <h:graphicImage  value="/ShowImage?id=#{b.id}" width="120" height="160"/>
+                </h:column>
+                <h:column>
+                    <div>
+                        <p><a href="/BOOKS/ShowBook?id=#{b.id}" target="blank">#{b.name}</a></p>
+                        <p><strong>#{msg.author_name}:</strong> #{authorList.getAuthor(b.authorId).name}</p>
+                        <p><strong>#{msg.publ_year}:</strong> #{b.publisherYear}</p>
+                        <p><strong>#{msg.isbn}:</strong> #{b.isbn}</p>
+                        <p><strong>#{msg.page_count}:</strong> #{b.pageCount} #{msg.pages}</p>
+                    </div>
+                </h:column>
+                <h:column>
+                    <div>
+                        <p><strong>#{msg.descr}</strong></p>
+                        <p>#{b.descr}</p>
+                    </div>
+                </h:column>
+            </h:dataTable>
+
+            <h:form rendered="#{srchControl.currentBooks.size() > srchControl.booksDisplayed}">
+                <p><strong>#{msg.pager}: </strong>
+                    <ui:repeat value="#{srchControl.pageNumbers}" var="num">
+                        <h:commandLink value=" #{num} " action="#{srchControl.display()}"
+                                       styleClass="#{num == srchControl.selectedPage ? 'red' : 'bold'}">
+                            <f:param name="page_num" value="#{num}"/>
+                        </h:commandLink>
+                    </ui:repeat>
+                </p>
+            </h:form>
+            
+        </ui:composition>
+    </h:body>
+</html>
+
+
