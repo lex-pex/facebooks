@@ -15,14 +15,27 @@ import lex.db.Database;
 
 @ManagedBean(eager = true)
 @ApplicationScoped
+
+/**
+ * Books Genre Controller
+ */
 public class GenreController implements Serializable {
 
+    /**
+     * List of Genges as an object property of the controller
+     */
     private ArrayList<Genre> genreList;
 
+    /**
+     * Contstructor retrieves and places genres into this object
+     */
     public GenreController() {
         fillGenresAll();
     }
 
+    /**
+     *
+     */
     private void fillGenresAll() {
         Statement stmt = null;
         ResultSet rs = null;

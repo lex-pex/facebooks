@@ -9,19 +9,14 @@
     </h:head>
     <h:body>
         <ui:composition template="/templates/lib_temp.xhtml">
-            
             <ui:define name="title">
                 #{ msg.book_list }
             </ui:define>
-            
             <ui:define name="content">
-                
                 <p><strong>#{msg.book_fount}: #{srchControl.booksSize}</strong></p>
-                
                 <ui:insert name="pages_bar">
                     <ui:include src="/templates/pages_bar.xhtml"/>
                 </ui:insert>
-
                 <h:dataTable value="#{srchControl.currentBooks}"
                              var="b" cellspacing="10px" columnClasses="col1, col2, col3">
                     <h:column>
@@ -43,17 +38,12 @@
                         </div>
                     </h:column>
                 </h:dataTable>
-
                 <ui:insert name="pages_bar">
                     <ui:include src="/templates/pages_bar.xhtml"/>
                 </ui:insert>
-                
             </ui:define>
-            
         </ui:composition>
-
     </h:body>
-
 </html>
 
 

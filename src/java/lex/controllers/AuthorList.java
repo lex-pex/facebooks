@@ -14,8 +14,43 @@ import lex.db.Database;
 
 @ManagedBean
 @SessionScoped
+
+/**
+ * Collection of authors
+ */
 public class AuthorList {
+
+    /**
+     * List of Genges as an object property of this
+     */
     private ArrayList<Author> list = new ArrayList<>();
+
+    /**
+     * Get Author by his identifier
+     * @param id - identifier of needed author
+     * @return Author object or null on fail
+     */
+    public Author getAuthor(int id) {
+        if (list.isEmpty()) list = getAuthors();
+        for (Author a : list)
+            if (a.getId() == id)
+                return a;
+        return null;
+    }
+
+    /**
+     * Get list of all authors
+     * @return List of Authors
+     */
+    public ArrayList<Author> getAuthorList() {
+        if (!list.isEmpty()) return list;
+        return getAuthors();
+    }
+
+    /**
+     * Get list of all authors
+     * @return List - this list of authors
+     */
     private ArrayList<Author> getAuthors() {
         Connection conn = null;
         Statement stmt = null;
@@ -44,19 +79,7 @@ public class AuthorList {
         }
         return list;
     }
-    
-    public Author getAuthor(int id) {
-        if (list.isEmpty()) list = getAuthors();
-        for (Author a : list)
-            if (a.getId() == id)
-                return a;
-        return null;
-    }
-    
-    public ArrayList<Author> getAuthorList() {
-        if (!list.isEmpty()) return list;
-        return getAuthors();
-    }
+
 }
 
 

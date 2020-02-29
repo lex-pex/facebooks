@@ -21,7 +21,7 @@ import lex.db.Database;
 @SessionScoped
 public class SrchControl implements Serializable {
 
-    private SearchType srchType;
+    private SearchType searchType;
     private String srchString;
     private Map<String, SearchType> srchMap = new HashMap<>();
     private ArrayList<Book> currentBooks;
@@ -154,7 +154,7 @@ public class SrchControl implements Serializable {
                 getExternalContext().getRequestParameterMap();
         String letter = params.get("letter");
         selectedChar = letter.charAt(0);
-        if (srchType == SearchType.AUTHOR) {
+        if (searchType == SearchType.AUTHOR) {
             setCurrentSql("select * from library.book inner join library.author "
                     + "on library.book.author_id = library.author.id where "
                     + "library.author.fio like '" + letter + "%'");
@@ -169,7 +169,7 @@ public class SrchControl implements Serializable {
         selectedGenre = 0;
         selectedChar = 0;
         selectedPage = 1;
-        if (srchType == SearchType.AUTHOR) {
+        if (searchType == SearchType.AUTHOR) {
             setCurrentSql("select * from library.book inner join library.author "
                     + "on library.book.author_id = library.author.id where "
                     + "library.author.fio like '%" + srchString + "%'");
@@ -241,12 +241,12 @@ public class SrchControl implements Serializable {
                 rusLetters[j ++] = i;
     }
 
-    public SearchType getSrchType() {
-        return srchType;
+    public SearchType getSearchType() {
+        return searchType;
     }
 
-    public void setSrchType(SearchType srchType) {
-        this.srchType = srchType;
+    public void setSearchType(SearchType searchType) {
+        this.searchType = searchType;
     }
 
     public Map<String, SearchType> getSrchMap() {
